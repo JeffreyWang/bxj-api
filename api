@@ -1,0 +1,126 @@
+fid：板块的id
+token：已经登陆的用户的token
+
+1.获得步行街的列表数据：
+http://mobileapi.hupu.com/2/1.0.0/bbs/getboardthreads?order=1&fid=34&page=1&num=20&boardpw=&token=(null)
+
+返回数据的格式：
+{
+	"islogin": 0,
+	"result": [{
+		"tid": "12870946",
+		"fid": "34",
+		"username": "lijin89",
+		"uid": "18851464",
+		"subject": "",    //帖子的标题
+		"postdate": "1433314351",
+		"lastpost": "1433332509",
+		"lastposter": "\u957f\u67aa\u4ea8\u5229",
+		"replies": "321",
+		"locked": "0",
+		"digest": "0",
+		"lights": "11",
+		"recs": "6"
+	}, ......]
+}
+
+列表数据获得下一页的数据
+http://mobileapi.hupu.com/2/1.0.0/bbs/getboardthreads?order=1&fid=34&page=2&num=20&boardpw=&token=(null)
+
+返回数据格式同上
+
+
+2.获得一个帖子的详情：
+http://mobileapi.hupu.com/2/1.0.0/bbs/getthreaddata?type=2&tid=12870946&boardpw=&token=(null)
+
+返回数据：
+{
+	"islogin": 0,
+	"result": {
+		"tid": "12870946",
+		"fid": "34",
+		"username": "lijin89",
+		"uid": "18851464",
+		"subject": "",    	//帖子的标题
+		"postdate": "1433314351",
+		"lastpost": "1433332578",
+		"lastposter": "\u9a91\u6bdb\u9a74\u4e0a\u4eac",
+		"replies": "325",
+		"locked": "0",
+		"digest": "0",
+		"lights": "11",
+		"recs": "6",
+		"content": " ", //帖子的内容，富文本表示
+		"boardname": "\u6b65\u884c\u8857", //版面的名称，这里的版面名称是 步行街
+		"boardurl": "",
+		"url": ""
+	}
+}
+
+3.获得一个帖子的回复：
+http://mobileapi.hupu.com/2/1.0.0/bbs/getthreadreplies?sort=1&tid=12870946&page=1&pagecount=20&boardpw=&token=(null)
+
+返回的数据：
+{
+	"islogin": 0,
+	"result": {
+		"allcount": "318",
+		"pagecount": 16,
+		"page": "1",
+		"ad": 0,
+		"data": {
+			"lightReplies": [{
+				"pid": "5627",
+				"author": "\u5e93\u91cc\u8d85\u8d8a\u4e54\u4e39", //回复人
+				"authorid": "25816800",
+				"postdate": "1433315627",
+				"content": "", //回帖内容，返回为富文本
+				"light": "499" //亮
+			},.........
+			}],
+			"replies": [{
+				"pid": "5355",
+				"author": "jennifer\u6211\u60f3\u4f60",
+				"authorid": "22099164",
+				"postdate": "1433315428",
+				"content": "",
+				"light": "29"
+			},.....]
+		}
+	}
+}
+
+获得下一页的回复数据：
+http://mobileapi.hupu.com/2/1.0.0/bbs/getthreadreplies?sort=1&tid=12870946&page=2&pagecount=20&boardpw=&token=(null)
+
+返回结果：返回结果中不包含lightReplies，其余的数据同上
+
+
+登陆，仅包含用户名，密码的方式，不包含第三方登陆的部分：
+http://mobileapi.hupu.com/2/1.0.0/passport/login
+
+请求的数据
+username=18601691670
+password=bb0cd95f6f09c9d25afe8db3b73b608b
+
+出错的数据返回：
+{
+	"error": {
+		"type": "passportLogin",
+		"id": 301,
+		"text": "\u7528\u6237\u540d\u6216\u5bc6\u7801\u9519\u8bef\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55"
+	}
+}
+
+正常的数据请求体
+username=quanwang&password=bb0cd95f6f09c9d25afe8db3b73b608b
+正常的数据返回：
+{
+	"result": {
+		"user": {
+			"uid": "19953724",
+			"username": "quanwang",
+			"token": "19953724|cXVhbndhbmc=|55a2|6c93403957352153fc4bdd028a719e37|57352153fc4bdd02"
+		}
+	}
+}
